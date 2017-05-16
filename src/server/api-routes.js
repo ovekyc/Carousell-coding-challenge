@@ -1,9 +1,9 @@
 import express from 'express';
-
+import TopicController from './controllers/topic';
 const router = express.Router();
 
-router.get('/', (req, res) => {
-  res.send('hello this is api routes');
-});
+router.get('/top20', TopicController.getTop20);
+router.get('/topic/:id', TopicController.getTopic);
+router.post('/topic', TopicController.addTopic);
 
 export default router;
