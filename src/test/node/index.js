@@ -3,3 +3,4 @@ require('source-map-support').install();
 
 import './server';
 import './models/topic';
+import './datastore';
