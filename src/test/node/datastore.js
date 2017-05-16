@@ -74,3 +74,16 @@ test('TopicPQ test', t => {
   t.equal(pq.top().down, expected.result.down, 'should be same count of down-vote');
   t.end();
 });
+
+test('TopicPQ test', t => {
+  const mockTopic = new Topic('mock');
+  const pq = new TopicPQ();
+  t.equal(pq.canPush(), true, 'can push');
+  for (let i = 0; i < 19; i = i + 1) {
+    pq.push(mockTopic);
+    t.equal(pq.canPush(), true, 'can push');
+  }
+  pq.push(mockTopic);
+  t.equal(pq.canPush(), false, 'cannot push');
+  t.end();
+});

@@ -1,6 +1,3 @@
-export const top20 = {};
-export const mainStore = {};
-
 export class PriorityQueue {
   constructor(compare) {
     this.store = [];
@@ -82,3 +79,6 @@ export class TopicPQ extends PriorityQueue {
     return this.size < 20;
   }
 }
+
+export const top20 = new TopicPQ();
+export const mainStore = {};
