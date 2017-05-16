@@ -24,7 +24,8 @@
   "dependencies": {
     "config": "^1.26.1",
     "express": "^4.15.2",
-    "gulp": "^3.9.1"
+    "gulp": "^3.9.1",
+    "uuid4": "^1.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
@@ -45,7 +46,9 @@
     "gulp-nodemon": "^2.2.1",
     "gulp-sourcemaps": "^2.6.0",
     "gulp-util": "^3.0.8",
+    "isuuid": "^0.1.0",
     "rimraf": "^2.6.1",
+    "tape": "^4.6.3",
     "unitest": "^1.0.0",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0"
