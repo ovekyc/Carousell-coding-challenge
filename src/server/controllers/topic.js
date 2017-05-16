@@ -4,7 +4,7 @@ import Topic from '../models/topic';
 export default class TopicController {
   static getTop20(req, res, cb) {
     const topics = Object.assign([], top20.store);
-    topics.sort((topicA, topicB) => topicB.up- topicA.up);
+    topics.sort((topicA, topicB) => topicB.up - topicA.up);
     res.send(topics);
     cb();
   }

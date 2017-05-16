@@ -83,6 +83,6 @@ export class TopicPQ extends PriorityQueue {
 export const top20 = new TopicPQ();
 export const mainStore = {};
 export const clearDB = () => {  // remove all data
-  while (top20.size > 0) top20.pop(); //eslint-disable-line curly
+  while (top20.size > 0) top20.pop(); // eslint-disable-line curly
   Object.keys(mainStore).map(key => delete mainStore[key]);
 };
