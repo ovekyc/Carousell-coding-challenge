@@ -8,9 +8,7 @@ test('PQ push test', t => {
     length: 4
   };
   const pq = new PriorityQueue();
-  expected.data.map((value => {
-    pq.push(value);
-  }));
+  expected.data.map((value => pq.push(value)));
 
   t.equal(pq.store[0] <= pq.store[1] && pq.store[0] <= pq.store[2],
     true, 'parent value should small or equal to children');
