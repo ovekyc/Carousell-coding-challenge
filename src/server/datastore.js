@@ -68,3 +68,17 @@ export class PriorityQueue {
     return this.size === 0;
   }
 }
+
+export class TopicPQ extends PriorityQueue {
+  static compareTopic(topicA, topicB) {
+    return topicA.up < topicB.up;
+  }
+
+  constructor() {
+    super(TopicPQ.compareTopic);
+  }
+
+  canPush() {
+    return this.size < 20;
+  }
+}

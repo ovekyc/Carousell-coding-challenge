@@ -1,5 +1,6 @@
 import test from 'tape';
-import {PriorityQueue} from '../../server/datastore';
+import {TopicPQ, PriorityQueue} from '../../server/datastore';
+import Topic from '../../server/models/topic';
 
 test('PQ push test', t => {
   const expected = {
@@ -52,5 +53,26 @@ test('PQ empty test', t => {
   t.equal(pq.empty(), true, 'should be empty');
   pq.push(1);
   t.equal(pq.empty(), false, 'should not be empty');
+  t.end();
+});
+
+test('TopicPQ test', t => {
+  const mockThreeTopic = new Topic('3');
+  mockThreeTopic.upVote(); mockThreeTopic.upVote(); mockThreeTopic.upVote();
+  const mockTwoTopic = new Topic('2');
+  mockTwoTopic.upVote(); mockTwoTopic.upVote();
+  const mockOneTopic = new Topic('1');
+  mockOneTopic.upVote();
+  const expected = {
+    data: [mockTwoTopic, mockOneTopic, mockThreeTopic],
+    result: mockOneTopic
+  };
+  const pq = new TopicPQ();
+  expected.data.map((value => pq.push(value)));
+
+  t.equal(pq.top().uid, expected.result.uid, 'should be same uid');
+  t.equal(pq.top().str, expected.result.str, 'should be same string');
+  t.equal(pq.top().up, expected.result.up, 'should be same count of up-vote');
+  t.equal(pq.top().down, expected.result.down, 'should be same count of down-vote');
   t.end();
 });
