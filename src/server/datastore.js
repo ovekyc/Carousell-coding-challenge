@@ -18,16 +18,53 @@ export class PriorityQueue {
     this.store[indexB] = temp;
   }
 
-  insert(e) {
+  push(e) {
     let current = this.size;
     let parent = this._getParentIndex(current);
     this.size = this.size + 1;
 
-    this.store[current] = e;
+    this.store[current] = e;    // Add new value to last
+    // Adjust location of new value by comparing with parent node
     while (current > 0 && this.compare(this.store[current], this.store[parent])) {
       this._swap(current, parent);
       current = parent;
       parent = this._getParentIndex(current);
     }
+  }
+
+  pop() {
+    if (this.size <= 0) return; // eslint-disable-line curly
+    const store = this.store;
+
+    // Replace root node with last node's value. And pop last node.
+    this.size = this.size - 1;
+    let current = 0;
+    store[current] = store[this.size];
+    store.pop();
+
+    // Adjust location of root node which was located in last index
+    while (current < this.size) {
+      const left = 2 * current + 1;
+      const right = 2 * current + 2;
+      let greater = current;
+      // eslint-disable-next-line curly
+      if (left < this.size && this.compare(store[left], store[greater])) greater = left;
+      // eslint-disable-next-line curly
+      if (right < this.size && this.compare(store[right], store[greater])) greater = right;
+      if (greater !== current) {
+        this._swap(current, greater);
+        current = greater;
+      } else {
+        break;
+      }
+    }
+  }
+
+  top() {
+    return this.size <= 0 ? null : this.store[0];
+  }
+
+  empty() {
+    return this.size === 0;
   }
 }
