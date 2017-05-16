@@ -96,3 +96,35 @@ test('Get Topic', t => {
     t.end();
   });
 });
+
+test('Up vote Topic', t => {
+  clearDB();
+  const mockTopic = new Topic('mock-topic');
+  const expected = {
+    up: 1,
+    down: 0,
+    topic: mockTopic,
+    status: 200
+  };
+
+  top20.push(mockTopic);
+  mainStore[mockTopic.uid] = mockTopic;
+
+  const req = httpMocks.createRequest({
+    method: 'POST',
+    url: `/topics/${mockTopic.uid}/up`,
+    params: {
+      id: mockTopic.uid
+    }
+  });
+  const res = httpMocks.createResponse();
+  TopicController.increaseUpVote(req, res, () => {
+    const data = res._getData();
+    t.equal(res.statusCode, expected.status, 'should be same status');
+    t.equal(data.uid, expected.topic.uid, 'should be same uid');
+    t.equal(data.str, expected.topic.str, 'should be same string');
+    t.equal(data.up, expected.up, 'should be same up-vote');
+    t.equal(data.down, expected.down, 'should be same down-vote');
+    t.end();
+  });
+});

@@ -34,4 +34,26 @@ export default class TopicController {
     res.send(newTopic);
     cb();
   }
+
+  static increaseUpVote(req, res, cb) {
+    const id = req.params.id ? req.params.id : null;
+    if (!id) {
+      cb(new Error('No id parameter'));
+      return;
+    }
+    mainStore[id].up = mainStore[id].up + 1;  // There is no sync problem because of the reference
+    res.send(mainStore[id]);
+    cb();
+  }
+
+  static increaseDownVote(req, res, cb) {
+    const id = req.params.id ? req.params.id : null;
+    if (!id) {
+      cb(new Error('No id parameter'));
+      return;
+    }
+    mainStore[id].down = mainStore[id].down + 1;
+    res.send(mainStore[id]);
+    cb();
+  }
 }
