@@ -29,7 +29,7 @@ export default class TopicController {
     const newTopic = new Topic(str);   // Crate new Topic
 
     mainStore[newTopic.uid] = newTopic; // Add to main data storage
-    //eslint-disable-next-line curly
+    // eslint-disable-next-line curly
     if (top20.canPush()) top20.push(newTopic);  // Add to top 20 if top 20 is not full
     res.send(newTopic);
     cb();
