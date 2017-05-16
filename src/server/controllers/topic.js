@@ -3,12 +3,20 @@ import Topic from '../models/topic';
 
 export default class TopicController {
   static getTop20(req, res, cb) {
-    res.send('top20');
+    const topics = Object.assign([], top20.store);
+    topics.sort((topicA, topicB) => topicB.up- topicA.up);
+    res.send(topics);
     cb();
   }
 
   static getTopic(req, res, cb) {
-    res.send('get t');
+    const id = req.params.id ? req.params.id : null;
+    if (!id) {
+      cb(new Error('No id parameter'));
+      return;
+    }
+    const topic = mainStore[id] ? mainStore[id] : null;
+    res.send(topic);
     cb();
   }
 
