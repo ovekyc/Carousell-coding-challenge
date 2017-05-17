@@ -22,10 +22,12 @@
   },
   "homepage": "https://github.com/ovekyc/Carousell-coding-challenge#readme",
   "dependencies": {
+    "body-parser": "^1.17.1",
     "config": "^1.26.1",
     "express": "^4.15.2",
     "gulp": "^3.9.1",
-    "uuid4": "^1.0.0"
+    "uuid4": "^1.0.0",
+    "winston": "^2.3.1"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",

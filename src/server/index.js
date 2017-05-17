@@ -1,10 +1,19 @@
 import express from 'express';
 import config from 'config';
 import path from 'path';
+import bodyParser from 'body-parser';
+import logger from 'winston';
 import apiRoutes from './api-routes';
 
 export default (cb) => {
   const app = express();
+
+  app.use(bodyParser.urlencoded({extended: true}));
+  app.use(bodyParser.json({limit: 1024}));
+  app.use((req, res, next) => { // Log requests
+    logger.info(`Request - ${req.method} - PATH : ${req.originalUrl} - ${new Date()}`);
+    next();
+  });
 
   app.use('/javascripts', express.static(path.join(__dirname, '../../dist-client/javascripts')));
   app.use('/', express.static(path.join(__dirname, '../../dist-client')));
@@ -12,11 +21,12 @@ export default (cb) => {
   app.use('/api', apiRoutes);
 
   app.get('*', (req, res) => {
-    res.status(404).send('server/index.js > 404 - Page Not Found');
+    if (!res.headersSent) // eslint-disable-line curly
+      res.status(404).send('server/index.js > 404 - Page Not Found');
   });
 
   // global error catcher, need four arguments
-  app.use((err, req, res) => {
+  app.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
     /* eslint-disable no-console */
     console.error('Error on request %s %s', req.method, req.url);
     console.error(err.stack);
