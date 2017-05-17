@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import APIHelper from '../utils/APIHelper';
+import TopicList from '../components/topic-list';
 
 class Home extends Component {
   constructor() {
@@ -17,11 +18,7 @@ class Home extends Component {
   render() {
     return (
       <div>
-        {
-          this.state.top20.map((data)=>{
-            return <div>{data.str}</div>
-          })
-        }
+        <TopicList topics={this.state.top20}/>
       </div>
     );
   }
