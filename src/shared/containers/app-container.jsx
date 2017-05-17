@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {BrowserRouter, Link, Route} from 'react-router-dom';
-import Home from '../components/home';
+import Home from '../components/home.jsx';
 
 class AppContainer extends Component {
   render() {
