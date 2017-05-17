@@ -1,5 +1,6 @@
 import {top20, mainStore} from '../datastore';
 import Topic from '../models/topic';
+import Top20Service from '../services/top20service';
 
 export default class TopicController {
   static getTop20(req, res, cb) {
@@ -29,8 +30,7 @@ export default class TopicController {
     const newTopic = new Topic(str);   // Crate new Topic
 
     mainStore[newTopic.uid] = newTopic; // Add to main data storage
-    // eslint-disable-next-line curly
-    if (top20.canPush()) top20.push(newTopic);  // Add to top 20 if top 20 is not full
+    Top20Service.update(true, newTopic);
     res.send(newTopic);
     cb();
   }
@@ -41,8 +41,10 @@ export default class TopicController {
       cb(new Error('No id parameter'));
       return;
     }
-    mainStore[id].up = mainStore[id].up + 1;  // There is no sync problem because of the reference
-    res.send(mainStore[id]);
+    const topic = mainStore[id];
+    topic.up = topic.up + 1;  // There is no sync problem because of the reference
+    Top20Service.update(false, topic);
+    res.send(topic);
     cb();
   }
 
