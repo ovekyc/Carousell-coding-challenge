@@ -1,12 +1,10 @@
-import {top20, mainStore} from '../datastore';
+import {mainStore} from '../datastore';
 import Topic from '../models/topic';
 import Top20Service from '../services/top20service';
 
 export default class TopicController {
   static getTop20(req, res, cb) {
-    const topics = Object.assign([], top20.store);
-    topics.sort((topicA, topicB) => topicB.up - topicA.up);
-    res.send(topics);
+    res.send(Top20Service.getSortedList());
     cb();
   }
 
