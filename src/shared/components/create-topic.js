@@ -13,7 +13,8 @@ class CreateTopic extends Component {
 
   @autobind
   createTopic() {
-    APIHelper.createTopic(this.state.topic);
+    APIHelper.createTopic(this.state.topic)
+      .then(topic => document.location = `/topics/${topic.uid}`);
   }
 
   @autobind
@@ -32,7 +33,7 @@ class CreateTopic extends Component {
           onChange={this.onTopicChange} />
         <button
           onClick={this.createTopic}>
-          <Link to="/">Submit</Link>
+          Submit
         </button>
         <button><Link to="/">Cancel</Link></button>
       </div>

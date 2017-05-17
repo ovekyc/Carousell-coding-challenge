@@ -16,11 +16,39 @@ export default class APIFetcher {
   }
 
   static createTopic(str) {
-    fetch('/api/topics', {
+    return fetch('/api/topics', {
         method: 'POST',
         headers: postHeader,
         body: JSON.stringify({str: str})
       })
+      .then(response => response.json())
+      .catch(error => {
+        logger.error(error);
+        return null;
+      });
+  }
+
+  static getTopic(uid) {
+    return fetch(`/api/topics/${uid}`, {method: 'GET'})
+      .then(response => response.json())
+      .catch(error => {
+        logger.error(error);
+        return null;
+      });
+  }
+
+  static increateUpVoteTopic(uid) {
+    return fetch(`/api/topics/${uid}/up`, {method: 'POST'})
+      .then(response => response.json())
+      .catch(error => {
+        logger.error(error);
+        return null;
+      });
+  }
+
+  static increateDownVoteTopic(uid) {
+    return fetch(`/api/topics/${uid}/down`, {method: 'POST'})
+      .then(response => response.json())
       .catch(error => {
         logger.error(error);
         return null;
