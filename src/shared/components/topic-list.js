@@ -6,10 +6,11 @@ class TopicList extends Component {
   }
 
   render() {
-    const topics = this.props.topics.map(topic =>
+    const topics = this.props.topics.map(topic => (
       <li key={topic.uid}>
         <a href={`/topics/${topic.uid}`}>{topic.str}</a>
-      </li>);
+      </li>
+    ));
     return (
       <ol>{topics}</ol>
     );
