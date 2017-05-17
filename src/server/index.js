@@ -19,7 +19,7 @@ export default (cb) => {
   app.use('/api', apiRoutes);
   app.get('*', (req, res) => {
     if (!res.headersSent) // eslint-disable-line curly
-      res.sendFile(path.join(__dirname, '../../dist-client/index.html'))
+      res.sendFile(path.join(__dirname, '../../dist-client/index.html'));
   });
 
   // global error catcher, need four arguments

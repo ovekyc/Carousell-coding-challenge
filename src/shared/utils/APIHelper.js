@@ -1,7 +1,7 @@
 import logger from 'winston';
 
 const postHeader = {
-  'Accept': 'application/json',
+  'Accept': 'application/json', // eslint-disable-line quote-props
   'Content-Type': 'application/json'
 };
 
@@ -17,10 +17,10 @@ export default class APIFetcher {
 
   static createTopic(str) {
     return fetch('/api/topics', {
-        method: 'POST',
-        headers: postHeader,
-        body: JSON.stringify({str: str})
-      })
+      method: 'POST',
+      headers: postHeader,
+      body: JSON.stringify({str: str})
+    })
       .then(response => response.json())
       .catch(error => {
         logger.error(error);

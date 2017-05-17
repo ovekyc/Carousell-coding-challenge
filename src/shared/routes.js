@@ -3,7 +3,6 @@ import {Route} from 'react-router-dom';
 import Home from './components/home';
 import CreateTopic from './components/create-topic';
 import Topic from './components/topic';
-import NotFound from './components/not-found';
 
 export default () => (
   <div>

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import autobind from 'autobind-decorator'
+import autobind from 'autobind-decorator';
 import APIHelper from '../utils/APIHelper';
 
 class CreateTopic extends Component {
@@ -14,7 +14,7 @@ class CreateTopic extends Component {
   @autobind
   createTopic() {
     APIHelper.createTopic(this.state.topic)
-      .then(topic => document.location = `/topics/${topic.uid}`);
+      .then(topic => (document.location = `/topics/${topic.uid}`));
   }
 
   @autobind

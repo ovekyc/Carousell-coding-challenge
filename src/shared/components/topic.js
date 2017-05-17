@@ -7,7 +7,7 @@ class Topic extends Component {
     super(props);
     this.state = {
       topic: {}
-    }
+    };
   }
 
   componentDidMount() {
