@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
-import {BrowserRouter, Link, Route} from 'react-router-dom';
-import Home from '../components/home';
-import CreateTopic from '../components/create-topic';
+import {BrowserRouter, Link} from 'react-router-dom';
+import Routes from '../routes';
 
 class AppContainer extends Component {
   render() {
@@ -15,8 +14,7 @@ class AppContainer extends Component {
 
           <hr/>
 
-          <Route exact path="/" component={Home}/>
-          <Route exact path="/new-topic" component={CreateTopic}/>
+          <Routes />
         </div>
       </BrowserRouter>
     );

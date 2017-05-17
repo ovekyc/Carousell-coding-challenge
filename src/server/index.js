@@ -16,13 +16,10 @@ export default (cb) => {
   });
 
   app.use('/javascripts', express.static(path.join(__dirname, '../../dist-client/javascripts')));
-  app.use('/', express.static(path.join(__dirname, '../../dist-client')));
-
   app.use('/api', apiRoutes);
-
   app.get('*', (req, res) => {
     if (!res.headersSent) // eslint-disable-line curly
-      res.status(404).send('server/index.js > 404 - Page Not Found');
+      res.sendFile(path.join(__dirname, '../../dist-client/index.html'))
   });
 
   // global error catcher, need four arguments
