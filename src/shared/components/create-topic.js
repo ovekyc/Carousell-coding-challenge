@@ -13,6 +13,10 @@ class CreateTopic extends Component {
 
   @autobind
   createTopic() {
+    if (this.state.topic.length > 255) {
+      alert('Topic string should be less then 255 character');
+      return;
+    }
     APIHelper.createTopic(this.state.topic)
       .then(topic => (document.location = `/topics/${topic.uid}`));
   }
